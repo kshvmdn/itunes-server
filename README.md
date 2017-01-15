@@ -22,9 +22,24 @@ Control iTunes over a server. Uses [`osascript`](https://developer.apple.com/leg
 
 ### Usage
 
+  - Use the `-help` flag to view accepted command line arguments:
+    
+    ```sh
+    $ itunes-server -help
+    Usage of itunes-server:
+      -no-track-list
+          Disable the track list endpoint. (default false)
+      -port string
+          Port to run the server on. (default "8080")
+    ```
+
+  - Start the server:
+
+    ```sh
+    $ itunes-server [ARGS]
+    ```
+
   - `itunes-server` provides a list of endpoints which you can access via standard HTTP requests.
-  
-  - Endpoints:
 
     + __GET /__
       * View current status and song (if playing).
@@ -65,28 +80,28 @@ Control iTunes over a server. Uses [`osascript`](https://developer.apple.com/leg
     + View current status:
       
       ```sh
-      curl -L localhost:8080
+      $ curl -L localhost:8080
       {"status":"playing","current":{"title":"Gobstopper","artist":"J Dilla","album":"Donuts"}}
       ```
 
     + Next:
 
       ```sh
-      curl -L localhost:8080/next
+      $ curl -L localhost:8080/next
       {"status":"playing","current":{"title":"One For Ghost","artist":"J Dilla","album":"Donuts"}}
       ```
 
     + Pause:
 
       ```sh
-      curl -L localhost:8080/pause
+      $ curl -L localhost:8080/pause
       {"status":"paused","current":{"title":"","artist":"","album":""}}
       ```
 
     + Play
     
       ```sh
-      curl -L localhost:8080/play
+      $ curl -L localhost:8080/play
       {"status":"playing","current":{"title":"One For Ghost","artist":"J Dilla","album":"Donuts"}}
       ```
 

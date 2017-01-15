@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -152,10 +153,18 @@ func Routes() []Route {
 }
 
 func main() {
+	portPtr := flag.String("port", "8080", "Port to run the server on.")
+	disableTrackListPtr := flag.Bool("no-track-list", false, "Disable the track list endpoint.")
+	flag.Parse()
+
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", Index)
-	router.HandleFunc("/tracks", ListTracks)
+
+	if !*disableTrackListPtr {
+		router.HandleFunc("/tracks", ListTracks)
+	}
+
 	router.HandleFunc("/play/track/{track_name}", PlaySong)
 	router.HandleFunc("/play/artist/{artist_name}", PlayArtist)
 	router.HandleFunc("/play/album/{album_name}", PlayAlbum)
@@ -170,5 +179,5 @@ func main() {
 		}(route.Endpoint, route.Command)
 	}
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", *portPtr), router))
 }
