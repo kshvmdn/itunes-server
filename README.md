@@ -22,8 +22,10 @@ Control iTunes over a server. Uses [`osascript`](https://developer.apple.com/leg
 
 ### Usage
 
+  - `itunes-server` allows you to control iTunes via standard HTTP requests.
+
   - Use the `-help` flag to view accepted command line arguments:
-    
+
     ```sh
     $ itunes-server -help
     Usage of itunes-server:
@@ -39,7 +41,7 @@ Control iTunes over a server. Uses [`osascript`](https://developer.apple.com/leg
     $ itunes-server [ARGS]
     ```
 
-  - `itunes-server` provides a list of endpoints which you can access via standard HTTP requests.
+  - Endpoints:
 
     + __GET /__
       * View current status and song (if playing).
@@ -105,7 +107,7 @@ Control iTunes over a server. Uses [`osascript`](https://developer.apple.com/leg
       {"status":"playing","current":{"title":"One For Ghost","artist":"J Dilla","album":"Donuts"}}
       ```
 
-  - If you're looking to expose your local server (so people can access iTunes without having to be on the same connection), I suggest using [ngrok](https://ngrok.com/).
+  - If you're looking to expose your local server (so people can access iTunes without having to be on the same network), I suggest using [ngrok](https://ngrok.com/).
 
 ### Contribute
 
